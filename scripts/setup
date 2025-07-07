@@ -166,6 +166,10 @@ if false; then
     fi
 fi
 
+echo "riscv64-tool chain path setup"
+# Add the toolchain to your PATH temporary
+export RISCV_TOOL_PATH=/home/zyy/repo/CFU-Playground/riscv-tool/riscv64-unknown-elf-gcc-10.1.0-2020.08.2-x86_64-linux-ubuntu14
+export PATH=$RISCV_TOOL_PATH/bin:$PATH
 
 # Check GCC
 if ! which riscv64-unknown-elf-gcc >/dev/null; then
@@ -179,6 +183,7 @@ elif ! riscv64-unknown-elf-gcc --version | grep 'SiFive GCC 10.1.' >/dev/null; t
     echo "https://cfu-playground.readthedocs.io/en/latest/setup-guide.html#step-3-install-riscv-toolchain"
     echo "(or, preferably, use the Conda environment)."
 fi
+
 
 # Verify other dependencies
 
@@ -196,5 +201,6 @@ fi
 PYTHONPATH=${PYTHONPATH//${CFU_ROOT}\//}
 EOF
 )
+
 
 echo "Setup complete"

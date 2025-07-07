@@ -101,3 +101,6 @@ third_party/yosys
 
 # Environment
 env
+
+# riscv tool
+riscv-tool
