@@ -104,3 +104,8 @@ env
 
 # riscv tool
 riscv-tool
+
+# Tags
+GTAGS
+GPATH
+GRTAGS
