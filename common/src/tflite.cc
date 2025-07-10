@@ -188,7 +188,7 @@ void tflite_load_model(const unsigned char* model_data,
     printf(" %d", dims->data[ii]);
   }
   puts("\n");
-
+  printf("DRAM: %d bytes\n", interpreter->arena_used_bytes());
   tflite_postload();
 }
 
@@ -263,6 +263,7 @@ void tflite_classify() {
   uint64_t end = perf_get_mcycle64();
 #ifndef NPROFILE
   printf("\n");
+  puts("LogCsv");
   profiler->LogCsv();
   perf_print_all_counters();
 #endif
