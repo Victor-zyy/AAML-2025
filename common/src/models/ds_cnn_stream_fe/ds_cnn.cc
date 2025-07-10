@@ -17,36 +17,71 @@ static void ds_cnn_stream_fe_init(void) {
 }
 
 // TODO: Implement your design here
+
+static void print_result_classification(float *data) 
+{
+    int i = 0;
+    for (i = 0; i < 12; ++i) {
+        printf(" %d : 0x%08lx,\n", i, *(uint32_t *)&data[i]);
+    }
+}
+
 static void do_init_zeros_input(void) 
 {
-    puts("Loading zeros input");
-    //tflite_load_model(
+    tflite_set_input_zeros_float();
+    tflite_classify();
+    float *data =  tflite_get_output_float();
+    print_result_classification(data);
 }
 
 static void do_init_label0(void) 
 {
-
+    tflite_set_input_float(label0_data);
+    tflite_classify();
+    float *data =  tflite_get_output_float();
+    print_result_classification(data);
 }
 
 
 static void do_init_label1(void) 
 {
-
+    tflite_set_input_float(label1_data);
+    tflite_classify();
+    float *data =  tflite_get_output_float();
+    print_result_classification(data);
 }
 
 static void do_init_label6(void) 
 {
-
+    tflite_set_input_float(label6_data);
+    tflite_classify();
+    float *data =  tflite_get_output_float();
+    print_result_classification(data);
 }
 
 static void do_init_label8(void) 
 {
-
+    tflite_set_input_float(label8_data);
+    tflite_classify();
+    float *data =  tflite_get_output_float();
+    print_result_classification(data);
 }
 
 static void do_init_label11(void) 
 {
+    tflite_set_input_float(label11_data);
+    tflite_classify();
+    float *data =  tflite_get_output_float();
+    print_result_classification(data);
+}
 
+static void do_golden_tests(void)
+{
+    do_init_label0();
+    do_init_label1();
+    do_init_label6();
+    do_init_label8();
+    do_init_label11();
 }
 static struct Menu MENU = {
     "Tests for ds_cnn_stream_fe",
@@ -58,6 +93,7 @@ static struct Menu MENU = {
         MENU_ITEM('4', "Run with label6", do_init_label6),
         MENU_ITEM('5', "Run with label8", do_init_label8),
         MENU_ITEM('6', "Run with label11", do_init_label11),
+        MENU_ITEM('g', "Run golden tests (check for expected outputs)", do_golden_tests),
         MENU_END,
     },
 };
