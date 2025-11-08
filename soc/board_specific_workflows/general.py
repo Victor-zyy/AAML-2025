@@ -119,10 +119,29 @@ class GeneralSoCWorkflow():
     def format_bitstream_filename(cls, directory: str, build_name: str) -> str:
         return os.path.join(directory, f'{build_name}.bit')
 
+    def flash(self, soc: litex_soc.LiteXSoC,
+             soc_builder: builder.Builder) -> None:
+        """Solid bin file onto the target board spi flash.
+        
+        Args:
+            soc: The LiteXSoc meant to be loaded.
+            soc_builder: The LiteX builder used to build the SoC.
+        """
+        prog = soc.platform.create_programmer()
+        binfile_filename = self.format_binfile_filename(
+            soc_builder.gateware_dir, soc.build_name)
+        prog.flash(0, binfile_filename)
+
+    @classmethod
+    def format_binfile_filename(cls, directory: str, build_name: str) -> str:
+        return os.path.join(directory, f'{build_name}.bin')
+
     def run(self) -> None:
         """Runs the workflow in order (make_soc -> build_soc -> load)."""
         soc = self.make_soc()
         soc_builder = self.build_soc(soc)
+        if self.args.flash:
+            self.flash(soc, soc_builder)
         if self.args.load:
             self.load(soc, soc_builder)
 

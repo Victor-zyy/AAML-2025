@@ -39,6 +39,7 @@
 # To run on Arty (from within proj/xxx subdirectory):
 # $ make prog    # Builds and programs gateware
 # $ make load    # Builds and loads C program
+# $ make flash   # Solid spi-flash on FPGA 
 #
 # To run on Renode:
 # $ make renode  # Builds and runs C program
@@ -103,6 +104,7 @@ MKDIR := /bin/mkdir
 
 LXTERM       := $(SOC_DIR)/bin/litex_term
 BITSTREAM    := $(SOC_GATEWARE_DIR)/$(PLATFORM).bit
+BINFILE      := $(SOC_GATEWARE_DIR)/$(PLATFORM).bin
 
 PROJ_DIR        := $(realpath .)
 CFU_GEN         := $(PROJ_DIR)/cfu_gen.py
@@ -321,6 +323,9 @@ ifneq 'sim' '$(PLATFORM)'
 # $(PLATFORM) == 'common_soc' or 'hps'
 prog: $(CFU_VERILOG)
 	$(SOC_MK) prog
+
+flash: $(CFU_VERILOG)
+	$(SOC_MK) flash
 
 bitstream: $(CFU_VERILOG)
 	$(SOC_MK) bitstream

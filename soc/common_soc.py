@@ -39,6 +39,8 @@ def main():
                         action='store_true',
                         help='Perform pre-lxterm loading procedures.')
     parser.add_argument('--software-path', help='Path to software to load')
+    parser.add_argument('--flash', action='store_true', help='Solid spi flash')
+
     purpose, _ = parser.parse_known_args()
 
     args = parse_workflow_args()
@@ -51,7 +53,6 @@ def main():
         workflow.software_load(purpose.software_path)
     else:
         workflow.run()
-
 
 if __name__ == "__main__":
     main()

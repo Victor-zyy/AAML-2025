@@ -109,3 +109,6 @@ riscv-tool
 GTAGS
 GPATH
 GRTAGS
+
+# soc vivado remaining
+soc/vivado*

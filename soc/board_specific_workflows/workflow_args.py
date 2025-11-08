@@ -35,6 +35,7 @@ def parse_workflow_args(input: List[str] = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description='LiteX SoC')
     parser.add_argument('--build', action='store_true', help='Build bitstream')
     parser.add_argument('--load', action='store_true', help='Load bitstream')
+    parser.add_argument('--flash', action='store_true', help='Solid SPI Flash')
     parser.add_argument('--toolchain',
                         help=('Specify toolchain for implementing '
                               'gateware (\'vivado\' or \'symbiflow\')'))

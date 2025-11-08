@@ -71,8 +71,9 @@ TARGET_RUN:=  MAKEFLAGS=-j8 $(PYRUN) ./common_soc.py $(LITEX_ARGS)
 
 BIOS_BIN := $(OUT_DIR)/software/bios/bios.bin
 BITSTREAM:= $(OUT_DIR)/gateware/$(TARGET).bit
+BINFILE  := $(OUT_DIR)/gateware/$(TARGET).bin
 
-.PHONY: bitstream litex-software load_hook prog clean check-timing
+.PHONY: bitstream litex-software load_hook prog flash clean check-timing
 
 bitstream: $(BITSTREAM) check-timing
 
@@ -99,6 +100,10 @@ load_hook:
 prog: $(BITSTREAM) check-timing
 	@echo Loading bitstream onto board
 	$(TARGET_RUN) --no-compile-software --load
+
+flash: $(BITSTREAM) check-timing
+	@echo Solid Flash onto board
+	$(TARGET_RUN) --no-compile-software --flash
 
 clean:
 	@echo Removing $(OUT_DIR)
