@@ -112,3 +112,7 @@ GRTAGS
 
 # soc vivado remaining
 soc/vivado*
+
+# zip package
+proj/*.zip
+common/src/models/*.zip
