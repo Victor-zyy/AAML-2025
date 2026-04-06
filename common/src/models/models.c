@@ -29,6 +29,7 @@
 #include "models/mnv2/mnv2.h"
 #include "models/pdti8/pdti8.h"
 #include "models/ds_cnn_stream_fe/ds_cnn.h"
+#include "models/mobileViT_xxs/mobileViT.h"
 
 inline void no_menu() {}
 
@@ -78,6 +79,9 @@ static struct Menu MENU = {
 #endif
 #if defined(INCLUDE_MODEL_DS_CNN_STREAM_FE)
         MENU_ITEM(AUTO_INC_CHAR, "Ds cnn stream fe", ds_cnn_stream_fe_menu),
+#endif
+#if defined(INCLUDE_MODEL_MOBILE_VIT_XXS)
+        MENU_ITEM(AUTO_INC_CHAR, "MobileViT xxs", mobileViT_xxs_menu),
 #endif
 
         MENU_END,
