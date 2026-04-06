@@ -34,11 +34,11 @@ clean() {
 
 debug() {
     echo "Platform Simulation Using Verilator Debugging..."
-    make PLATFORM=sim load
+    make PLATFORM=sim EXTRA_LITEX_ARGS="--cpu-variant=perf+cfu" load
 }
 
 renode() {
-    echo "Platform Simulation Using Verilator Debugging..."
+    echo "Platform Simulation Using Renode Debugging..."
     make renode 
 }
 end() {
