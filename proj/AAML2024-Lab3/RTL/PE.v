@@ -20,7 +20,7 @@ module PE (
             right <= left;
             down  <= top;
             // unsigned multiplication and accumulation
-            acc <= acc + (left * top); 
+            acc <= $signed(acc) + $signed(left)*$signed(top);
         end
     end
 endmodule
